@@ -9,8 +9,7 @@ pipeline {
     environment {
         DOCKER_IMAGE  = 'cicd-demo'
         DOCKER_TAG    = "${BUILD_NUMBER}"
-        TOMCAT_WEBAPPS = '/root/apache-tomcat-9.0.117/webapps
-'
+        TOMCAT_WEBAPPS = '/root/apache-tomcat-9.0.117/webapps'
     }
 
     stages {
