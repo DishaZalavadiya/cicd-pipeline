@@ -24,11 +24,13 @@ pipeline {
         stage('Build') {
             steps {
                 echo '--- Building WAR with Maven ---'
-                sh 'mvn clean package -DskipTests'
+                dir('cicd-demo') {
+                    sh 'mvn clean package -DskipTests'
+                }
             }
             post {
                 success {
-                    archiveArtifacts artifacts: 'target/*.war'
+                    archiveArtifacts artifacts: 'cicd-demo/target/*.war'
                     echo 'WAR built successfully!'
                 }
             }
@@ -37,7 +39,9 @@ pipeline {
         stage('Test') {
             steps {
                 echo '--- Running unit tests ---'
-                sh 'mvn test'
+                dir('cicd-demo') {
+                    sh 'mvn test'
+                }    
             }
         }
 
@@ -56,7 +60,7 @@ pipeline {
             steps {
                 echo '--- Deploying to Tomcat on EC2 ---'
                 sh """
-                    cp target/cicd-demo.war ${TOMCAT_WEBAPPS}/
+                    cp cicd-demo/target/cicd-demo.war ${TOMCAT_WEBAPPS}/
                     echo 'Deployed to Tomcat at port 8090'
                 """
             }
