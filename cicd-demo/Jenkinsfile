@@ -54,14 +54,15 @@ pipeline {
 }
 
         stage('Deploy') {
-    steps {
-        echo '--- Deploying to Tomcat on EC2 ---'
-        sh """
-            cp cicd-demo/target/cicd-demo.war ${TOMCAT_WEBAPPS}/
-            echo 'Deployed to Tomcat at port 8090'
-        """
-    }
-}
+            steps {
+                echo '--- Deploying to Tomcat ---'
+                sh """
+                    sudo cp cicd-demo/target/cicd-demo.war ${TOMCAT_WEBAPPS}/
+                    sudo /root/apache-tomcat-9.0.117/bin/shutdown.sh || true
+                    sudo /root/apache-tomcat-9.0.117/bin/startup.sh
+                """
+            }
+        }
     }
 
     post {
