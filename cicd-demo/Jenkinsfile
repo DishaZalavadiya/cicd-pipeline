@@ -54,16 +54,17 @@ pipeline {
 }
 
         stage('Deploy') {
-            steps {
-                echo '--- Deploying to Tomcat on EC2 ---'
-                
-            sh """
-                docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
-                docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest
-            """
-        
-            }
-        }
+    steps {
+        echo '--- Deploying Docker Container ---'
+        sh """
+            docker stop cicd-container || true
+            docker rm cicd-container || true
+
+            docker run -d -p 8080:8080 --name cicd-container \
+                ${DOCKER_IMAGE}:${DOCKER_TAG}
+        """
+    }
+}
     }
 
     post {
