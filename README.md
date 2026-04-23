@@ -26,3 +26,6 @@ Developer → git push → GitHub → Webhook → Jenkins (EC2:8080)
 docker build -t cicd-demo .
 docker run -p 8080:8080 cicd-demo
 ```
+<img width="1360" height="768" alt="Screenshot (6)" src="https://github.com/user-attachments/assets/c8099d3c-e354-405a-8dee-f21cbe80474d" />
+<img width="1359" height="723" alt="image" src="https://github.com/user-attachments/assets/46c3e21a-af42-4c55-a3b5-01e84c914b70" />
+
