@@ -21,8 +21,8 @@ Developer → git push → GitHub → Webhook → Jenkins (EC2:8080)
 4. **Dockerize** — multi-stage Docker build
 5. **Deploy** — WAR copied to Tomcat webapps
 
-## Run with Docker
-```bash
+## Run with Docker containor
+```bash 
 docker build -t cicd-demo .
 docker run -p 8080:8080 cicd-demo
 ```
