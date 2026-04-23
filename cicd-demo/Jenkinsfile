@@ -54,15 +54,18 @@ pipeline {
 }
 
         stage('Deploy') {
-            steps {
-                echo '--- Deploying to Tomcat ---'
-                sh """
-                    sudo cp cicd-demo/target/cicd-demo.war ${TOMCAT_WEBAPPS}/
-                    sudo /root/apache-tomcat-9.0.117/bin/shutdown.sh || true
-                    sudo /root/apache-tomcat-9.0.117/bin/startup.sh
-                """
-            }
-        }
+    steps {
+        echo '--- Deploying to Tomcat ---'
+        sh """
+            sudo cp cicd-demo/target/cicd-demo.war ${TOMCAT_WEBAPPS}/
+            sudo chown jenkins:jenkins ${TOMCAT_WEBAPPS}/cicd-demo.war
+            sudo rm -rf ${TOMCAT_WEBAPPS}/cicd-demo
+            sudo /root/apache-tomcat-9.0.117/bin/shutdown.sh || true
+            sleep 3
+            sudo /root/apache-tomcat-9.0.117/bin/startup.sh
+        """
+    }
+}
     }
 
     post {
