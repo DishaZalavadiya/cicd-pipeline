@@ -24,7 +24,7 @@ RUN rm -rf /usr/local/tomcat/webapps/ROOT
 COPY --from=builder /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
 
 # Expose Tomcat port
-EXPOSE 9090
+EXPOSE 8080
 
 # Start Tomcat
 CMD ["catalina.sh", "run"]
