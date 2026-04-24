@@ -15,7 +15,7 @@ RUN mvn clean package -DskipTests
 
 
 # ---------- Stage 2: Run ----------
-FROM tomcat:10.1-jre17
+FROM tomcat:9.0-jre17
 
 # Remove default ROOT app
 RUN rm -rf /usr/local/tomcat/webapps/ROOT
